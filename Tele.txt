@@ -1,0 +1,93 @@
+import time,datetime
+import RPi.GPIO as b
+import telepot
+from telepot.loop import MessageLoop
+LED1=22
+LED2=16
+LED3=35
+LED4=37
+
+now=datetime.datetime.now()
+b.setmode(b.BOARD)
+b.setwarnings(False)
+
+b.setup(LED1,b.OUT)
+b.output(LED1,0)
+
+b.setup(LED2,b.OUT)
+b.output(LED2,0)
+
+b.setup(LED3,b.OUT)
+b.output(LED3,0)
+
+b.setup(LED4,b.OUT)
+b.output(LED4,0)
+
+def action(msg):
+ chat_id=msg['chat']['id']
+ command=msg['text']
+
+ print('Recevied : %s'% command)
+ if 'on' in command:
+     message="on"
+ if 'LED1' in command:
+     message=message+"LED1"
+     b.output(LED1,1)
+ if 'LED2' in command:
+     message=message+"LED2"
+     b.output(LED2,1)
+     
+ if 'LED3' in command:
+     message=message+"LED3"
+     b.output(LED3,1)
+     
+ if 'LED4' in command:
+     message=message+"LED4"
+     b.output(LED4,1)
+     
+ if 'all' in command:
+     message=message+"all"
+     b.output(LED1,1)
+     b.output(LED2,1)
+     b.output(LED3,1)
+     b.output(LED4,1)
+     message=message+"light(s)"
+     telegram_bot.sendMessage(chat_id,message)
+
+ if 'off' in command:
+     message="off"
+ if 'LED1' in command:
+     message=message+"LED1"
+     b.output(LED1,0)
+     
+ if 'LED2' in command:
+     message=message+"LED2"
+     b.output(LED2,0)
+     
+     
+ if 'LED3' in command:
+     message=message+"LED3"
+     b.output(LED3,0)
+     
+ if 'LED4' in command:
+     message=message+"LED4"
+     b.output(LED4,0)
+     
+ if 'all' in command:
+     message=message+"all"
+     b.output(LED1,0)
+     b.output(LED2,0)
+     b.output(LED3,0)
+     b.output(LED4,0)
+     message=message+"light(s)"
+     telegram_bot.sendMessage(chat_id,message)
+
+telegram_bot=telepot.Bot('6596882771:AAFl47xAEK4ISl99fCqKBBLF94xYqy_676A')
+print(telegram_bot.getMe())
+
+MessageLoop(telegram_bot,action).run_as_thread()
+print('up and Running...........................')
+
+while 1:
+ time.sleep(100)
+ 

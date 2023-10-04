@@ -1,0 +1,46 @@
+#Light the LED
+import RPi.GPIO as a
+from time import sleep
+a.setmode(a.BOARD)
+ledPin = 22
+a.setup(ledPin, a.OUT)
+a.output(ledPin, False)
+try:
+    while True:
+        a.output(ledPin, True)
+        print ("ON")
+        sleep(1)
+        a.output(ledPin, False)
+        print("OFF")
+        sleep(1)
+finally:
+    a.output(ledPin, False)
+    a.cleanup()
+
+#Patterns with
+import RPi.GPIO as b
+from time import sleep
+b.setmode(b.BOARD)
+b.setup(11,b.OUT)
+b.setup(13,b.OUT)
+b.setup(15,b.OUT)
+for i in range(5):
+    b.output(11,True)
+    print("1st LED ON")
+    sleep(1)
+    b.output(11,False)
+    print("1st LED OFF")
+    sleep(1)
+    b.output(13,True)
+    print("2ND LED ON")
+    sleep(1)
+    b.output(13,False)
+    print("2nd LED OFF")
+    sleep(1)
+    b.output(15,True)
+    print("3rd LED ON")
+    sleep(1)
+    b.output(15,False)
+    print("3RD LED OFF")
+    sleep(1)
+    print("Done")

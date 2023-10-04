@@ -1,0 +1,28 @@
+#gps
+ls /dev/ttyUSB*
+sudo cat /dev/ttyUSB0
+
+sudo apt-get update
+sudo apt-get install gpsd
+
+sudo systemctl enable gpsd.socket
+sudo systemctl start gpsd.socket
+
+gpsd
+gpsmon
+cgps -s
+sudo killall gpsd
+
+#Home
+
+cd /home/pi/Downloads/
+cd WebIOPi-x.y.z
+
+wget https://raw.githubusercontent.com/doublebind/raspi/master/webiopipi2bplus.patch
+sudo ./setup.sh
+
+sudo webiopi -d -c /etc/webiopi/config
+sudo webiopi-passwd
+
+sudo /etc/init.d/webiopi start
+sudo /etc/init.d/webiopi stop
